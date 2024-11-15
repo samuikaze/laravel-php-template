@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DemoResponse;
+use App\Services\IDemoService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -16,13 +18,21 @@ use Illuminate\Http\Request;
 class DemoTestController extends Controller
 {
     /**
+     * DemoService
+     *
+     * @var \App\Services\IDemoService
+     */
+    protected $demo_service;
+
+    /**
      * Create a new controller instance.
      *
+     * @param \App\Services\IDemoService $demo_service
      * @return void
      */
-    public function __construct()
+    public function __construct(IDemoService $demo_service)
     {
-        //
+        $this->demo_service = $demo_service;
     }
 
     /**
@@ -43,8 +53,8 @@ class DemoTestController extends Controller
      *         @OA\Schema(
      *           @OA\Property(
      *             property="data",
-     *             type="string",
-     *             example="Ok."
+     *             type="array",
+     *             items=@OA\Items(ref="#/components/schemas/DemoResponse")
      *           )
      *         )
      *       }
@@ -54,6 +64,10 @@ class DemoTestController extends Controller
      */
     public function heartbeat(): JsonResponse
     {
-        return $this->response(data: 'Ok.');
+        $data = $this->demo_service->getDemoResponse();
+        // 透過 Eloquent API Resources 對 JSON 結構整形
+        $data = new DemoResponse($data);
+
+        return $this->response(data: $data);
     }
 }

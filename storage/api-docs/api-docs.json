@@ -27,8 +27,10 @@
                                         {
                                             "properties": {
                                                 "data": {
-                                                    "type": "string",
-                                                    "example": "Ok."
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/DemoResponse"
+                                                    }
                                                 }
                                             },
                                             "type": "object"
@@ -58,6 +60,23 @@
                         "type": "string",
                         "example": "錯誤訊息",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "DemoResponse": {
+                "title": "範例回應",
+                "description": "請求回傳的範例回應格式",
+                "properties": {
+                    "responseText": {
+                        "description": "回應文字",
+                        "type": "string",
+                        "example": "Ok."
+                    },
+                    "statusCode": {
+                        "description": "回應狀態碼",
+                        "type": "integer",
+                        "example": 200
                     }
                 },
                 "type": "object"
