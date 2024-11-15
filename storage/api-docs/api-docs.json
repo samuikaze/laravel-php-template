@@ -1,0 +1,83 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "專案名稱",
+        "description": "<專案名稱>的 API 文件",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/heartbeat": {
+            "get": {
+                "tags": [
+                    "Example v1"
+                ],
+                "summary": "心跳",
+                "description": "心跳",
+                "operationId": "7ea5cdc440055d76763b365f42602578",
+                "responses": {
+                    "200": {
+                        "description": "心跳回應",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/BaseResponse"
+                                        },
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "type": "string",
+                                                    "example": "Ok."
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BaseResponse": {
+                "title": "共通回應",
+                "description": "請求回傳的共通酬載",
+                "properties": {
+                    "status": {
+                        "description": "HTTP 狀態碼",
+                        "type": "integer",
+                        "example": "200"
+                    },
+                    "message": {
+                        "description": "錯誤訊息",
+                        "type": "string",
+                        "example": "錯誤訊息",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "登入驗證",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Example v1",
+            "description": "範例相關"
+        }
+    ]
+}
