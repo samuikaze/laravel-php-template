@@ -30,11 +30,23 @@ class RequestLogger
     protected function generateLogString($request): string
     {
         $headers = $request->headers->all();
-        $log = strtoupper($request->method()).
-            ' '.$request->getSchemeAndHttpHost().
-            '/'.$request->path().
-            ' '.$headers['content-type'][0].
-            ' '.$headers['content-length'][0];
+        $log = strtoupper($request->method());
+
+        if (! is_null($request->getSchemeAndHttpHost())) {
+            $log .= ' '.$request->getSchemeAndHttpHost();
+        }
+
+        if (! is_null($request->path())) {
+            $log .= '/'.$request->path();
+        }
+
+        if (array_key_exists('content-type', $headers) && count($headers['content-type']) > 1) {
+            $log .= ' '.$headers['content-type'][0];
+        }
+
+        if (array_key_exists('content-length', $headers) && count($headers['content-length']) > 1) {
+            $log .= ' '.$headers['content-length'][0];
+        }
 
         $log = '[Request] '.$log;
 

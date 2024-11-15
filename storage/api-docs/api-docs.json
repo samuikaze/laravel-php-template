@@ -6,14 +6,14 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/heartbeat": {
+        "/api/v1/heartbeat": {
             "get": {
                 "tags": [
                     "Example v1"
                 ],
                 "summary": "心跳",
                 "description": "心跳",
-                "operationId": "7ea5cdc440055d76763b365f42602578",
+                "operationId": "b46c105a1c28c76aaadc2a40abffbd87",
                 "responses": {
                     "200": {
                         "description": "心跳回應",

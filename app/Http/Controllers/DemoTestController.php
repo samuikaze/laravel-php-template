@@ -31,7 +31,7 @@ class DemoTestController extends Controller
      * @return \Illuminate\Http\JsonResponse
      *
      * @OA\Get(
-     *   path="/api/heartbeat",
+     *   path="/api/v1/heartbeat",
      *   summary="心跳",
      *   tags={"Example v1"},
      *   @OA\Response(
